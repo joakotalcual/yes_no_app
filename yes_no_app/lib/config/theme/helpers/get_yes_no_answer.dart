@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:yes_no_app/infrastructure/models/yes_no_model.dart';
 
 class GetYesNoAnswer{
   //Crea la instancia de la clase DIO
@@ -11,8 +12,7 @@ class GetYesNoAnswer{
   Future<Message> getAnswer() async{
     //Almacenar los datos de la petición GET
     final response = await _dio.get('https://yesno.wtf/api');
-
-  throw UnimplementedError();
-    return Message(text: 'text', fromWho: FromWho.me);
+    final yesNoModel = YesNoModel.fromJson(response.data);
+    return yesNoModel.toMessageEntity();
   }
 }

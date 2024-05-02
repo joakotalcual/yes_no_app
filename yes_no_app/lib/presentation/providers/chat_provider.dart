@@ -9,8 +9,8 @@ class ChatProvider extends ChangeNotifier{
   final getYesNoAnswer = GetYesNoAnswer();
 
   List<Message> messageList = [
-    Message(text: 'Hola guapaaaaaaaaa', fromWho: FromWho.me),
-    Message(text: '¿Si vas a querer algo preciosa?', fromWho: FromWho.me),
+    // Message(text: 'Hola guapaaaaaaaaa', fromWho: FromWho.me),
+    // Message(text: '¿Si vas a querer algo preciosa?', fromWho: FromWho.me),
     //Message(text: '', imageUrl: 'https://yesno.wtf/assets/no/20-56c4b19517aa69c8f7081939198341a4.gif', fromWho: FromWho.hers)
   ];
 
@@ -21,21 +21,28 @@ class ChatProvider extends ChangeNotifier{
     messageList.add(newMessage);
 
     //Notificar al provider
-    NotificationListener;
-    moveScrollBottom();
     if(text.endsWith('?')){
       herReply();
     }
+    notifyListeners();
+    moveScrollBottom();
     print('LOS MENSAJES TOTALES: ${messageList.length}');
+    for (var message in messageList) {
+      if(message.fromWho==FromWho.hers){
+        print('Texto: ${message.text}');
+      //print('Forzado: ${message.forced}');
+      print('URL de la imagen: ${message.imageUrl}');
+      print(''); // Agregar una línea en blanco para separar los mensajes
+      }
+    }
   }
 
   Future<void >herReply () async{
     //Obtener petición y almacenarlo en una variable
     final herMessage = await getYesNoAnswer.getAnswer();
     messageList.add(herMessage);
-    NotificationListener;
+    notifyListeners();
     moveScrollBottom();
-
   }
 
   Future<void> moveScrollBottom () async {
