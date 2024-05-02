@@ -58,5 +58,7 @@ class YesNoModel {
               ? respuestaNegativa[Random().nextInt(respuestaNegativa.length)]
               : respuestaTalVez[Random().nextInt(respuestaTalVez.length)],
       imageUrl: image,
-      fromWho: FromWho.hers);
+      fromWho: FromWho.hers,
+      hour: '${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}'
+    );
 }

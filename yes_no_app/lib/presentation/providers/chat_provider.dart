@@ -17,7 +17,9 @@ class ChatProvider extends ChangeNotifier{
   //Método para enviar mensaje
   Future<void> sendMessage(String text) async{
     //El mensaje siempre va a ser mío
-    final newMessage = Message(text: text, fromWho: FromWho.me);
+    DateTime now = DateTime.now();
+    String formattedTime = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    final newMessage = Message(text: text, fromWho: FromWho.me, hour: formattedTime);
     messageList.add(newMessage);
 
     //Notificar al provider
